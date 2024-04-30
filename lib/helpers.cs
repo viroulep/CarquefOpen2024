@@ -20,3 +20,37 @@ Define("CanScrambleEvent",
          BooleanProperty("can-scramble"),
          (PsychSheetPosition({1, Event}) < 20)
        ))
+
+# AssignmentSet for Kilian, he has organizational errands to run.
+# Pyram 1, 333 1, 444 2
+Define("KilianSet",
+    [AssignmentSet("kilian",
+      (WcaId() == "2016FARR02"),
+      (GroupNumber() == {1, Number}))])
+
+# Generic AssignmentSet for delegates; spread them evenly accross groups
+Define(
+  "DelegatesSets",
+  [AssignmentSet("delegates",
+                 HasRole("delegate"), true)])
+
+# Generic AssignmentSet for score takers, they should compete early.
+Define(
+  "EarlyAssignmentSets",
+  [AssignmentSet("scoretaking",
+                 BooleanProperty("scoretaking"),
+                 (GroupNumber() == 1))])
+
+# Generic AssignmentSet for everyone
+Define("EveryoneAssignmentSet", [AssignmentSet("everyone", true, true)])
+
+# Generic AssignmentSet for scramblers, to spread them evenly
+Define(
+  "ScramblersSets",
+  [AssignmentSet("scramblers",
+    CanScrambleEvent(EventForRound(First<Round, Array<AssignmentSet>>())), true)])
+
+# Exclude orga and delegates from regular staffing assignments
+Define("EligibleToStaff", And(Not(HasRole("delegate")), Not(HasRole("organizer"))))
+
+Define("CompetitorsAndDelegates", Persons(Or(CompetingIn({1, Event}), HasRole("delegate"))))
