@@ -74,6 +74,16 @@ Map(JobsPerRound(),
     Second<Round, Array<AssignmentJob>>(),
     DefaultStaffScorers(EventForRound(First<Round, Array<AssignmentJob>>()))))
 
+# 444bf is small/specific enough that I extracted it from the map above; specifically
+# I want to assign 5x5 scramblers who have competed right before the event.
+AssignStaff(
+    _444bf-r1,
+    true,
+    # This is not a typo
+    CompetitorsAndDelegates(_555),
+    DefaultJobs(2, 2, 2, 12, CanScrambleEvent(_555)),
+    DefaultStaffScorers(_555))
+
 # Subsequent rounds:
 # saturday: _555-r2, _pyram-r2, _333oh-r2
 # sunday: _444-r2, _333-r2, _333bf-r2, _222-r2, _pyram-r3, _444-r3, _333-r3

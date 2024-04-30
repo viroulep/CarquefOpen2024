@@ -53,4 +53,5 @@ Define(
 # Exclude orga and delegates from regular staffing assignments
 Define("EligibleToStaff", And(Not(HasRole("delegate")), Not(HasRole("organizer"))))
 
-Define("CompetitorsAndDelegates", Persons(Or(CompetingIn({1, Event}), HasRole("delegate"))))
+# I'm not sure if order is guaranteed to be stable everytime, sort Persons just in case.
+Define("CompetitorsAndDelegates", Sort(Persons(Or(CompetingIn({1, Event}), HasRole("delegate"))), Name()))
