@@ -7,7 +7,7 @@ Define("CreateGroupsInRoom",
 CreateGroupsInRoom(_555-r1, 2)
 CreateGroupsInRoom(_444bf-r1, 1)
 CreateGroupsInRoom(_pyram-r1, 3)
-CreateGroupsInRoom(_555-r2, 3)
+CreateGroupsInRoom(_555-r2, 1)
 
 CreateGroupsInRoom(_333bf-r1, 2)
 CreateGroupsInRoom(_clock-r1, 2)

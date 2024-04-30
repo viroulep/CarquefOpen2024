@@ -20,6 +20,11 @@ Define("CanScrambleEvent",
          BooleanProperty("can-scramble"),
          (PsychSheetPosition({1, Event}) < 20)
        ))
+Define("CanScrambleEventRelaxed",
+       And(
+         In({1, Event}, RegisteredEvents()),
+         BooleanProperty("can-scramble")
+       ))
 
 # AssignmentSet for Kilian, he has organizational errands to run.
 # Pyram 1, 333 1, 444 2
@@ -55,3 +60,23 @@ Define("EligibleToStaff", And(Not(HasRole("delegate")), Not(HasRole("organizer")
 
 # I'm not sure if order is guaranteed to be stable everytime, sort Persons just in case.
 Define("CompetitorsAndDelegates", Sort(Persons(Or(CompetingIn({1, Event}), HasRole("delegate"))), Name()))
+
+Define("DefaultJobs",
+       [
+         Job("Delegate", {1, Number}, eligibility=HasRole("delegate")),
+         Job("scrambler", {2, Number}, eligibility=And({5, Boolean(Person)}, EligibleToStaff())),
+         Job("runner", {3, Number}, eligibility=EligibleToStaff()),
+         Job("judge", {4, Number}, eligibility=EligibleToStaff())
+       ])
+
+Define("DefaultStaffScorers",
+       [
+         JobCountScorer(-1),
+         SameJobScorer(60, -5, 4),
+         ConsecutiveJobScorer(90, -3, 0),
+         # for such a small competition just allow any trustable scrambler
+         ScrambleSpeedScorer({1, Event}, 10:00s, 5),
+         # Convoluted way of checking for newcomers
+         GroupScorer(Not((Type(WcaId()) == "String")), -50),
+         FollowingGroupScorer(-50)
+       ])

@@ -31,26 +31,6 @@ Map(FirstRoundsAssignments(),
         ))
    )
 
-Define("DefaultJobs",
-       [
-         Job("Delegate", {1, Number}, eligibility=HasRole("delegate")),
-         Job("scrambler", {2, Number}, eligibility=And({5, Boolean(Person)}, EligibleToStaff())),
-         Job("runner", {3, Number}, eligibility=EligibleToStaff()),
-         Job("judge", {4, Number}, eligibility=EligibleToStaff())
-       ])
-
-Define("DefaultStaffScorers",
-       [
-         JobCountScorer(-1),
-         SameJobScorer(60, -5, 4),
-         ConsecutiveJobScorer(90, -3, 0),
-         # for such a small competition just allow any trustable scrambler
-         ScrambleSpeedScorer({1, Event}, 10:00s, 5),
-         # Convoluted way of checking for newcomers
-         GroupScorer(Not((Type(WcaId()) == "String")), -50),
-         FollowingGroupScorer(-50)
-       ])
-
 # Delegates, Scramblers, Runners, Judges, CanScramble?
 Define("JobsPerRound", [
   # For 5x5 there are not enough people in groups to properly staff all stations
