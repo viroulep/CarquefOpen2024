@@ -34,7 +34,7 @@ Map(FirstRoundsAssignments(),
 # Delegates, Scramblers, Runners, Judges, CanScramble?
 Define("JobsPerRound", [
   # For 5x5 there are not enough people in groups to properly staff all stations
-  Tuple(_555-r1, DefaultJobs(2, 3, 2, 11, CanScrambleEvent(_555))),
+  Tuple(_555-r1, DefaultJobs(2, 2, 2, 11, CanScrambleEvent(_555))),
   Tuple(_pyram-r1, DefaultJobs(2, 2, 3, 16, CanScrambleEvent(_pyram))),
   Tuple(_333bf-r1, DefaultJobs(2, 2, 1, 8, CanScrambleEvent(_333bf))),
   Tuple(_clock-r1, DefaultJobs(2, 2, 1, 8, CanScrambleEvent(_clock))),
