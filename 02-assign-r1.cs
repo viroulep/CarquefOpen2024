@@ -1,10 +1,5 @@
 #include "lib/helpers.cs"
 
-Define(
-  "TopCompetitors",
-  [AssignmentSet("top",
-      (PsychSheetPosition({1, Event}) <= {2, Number}), (GroupNumber() == {3, Number}))])
-
 Define("FirstRoundsAssignments", [
   Tuple(_555-r1, MakeArray<AssignmentSet>()),
   Tuple(_444bf-r1, MakeArray<AssignmentSet>()),

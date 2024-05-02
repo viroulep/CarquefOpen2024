@@ -83,3 +83,8 @@ Define("DefaultStaffScorers",
          GroupScorer(Not((Type(WcaId()) == "String")), -50),
          FollowingGroupScorer(-50)
        ])
+
+Define(
+  "TopCompetitors",
+  [AssignmentSet("top",
+      (PsychSheetPosition({1, Event}) <= {2, Number}), (GroupNumber() == {3, Number}))])
